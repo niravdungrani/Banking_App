@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "79f0ba2c-d848-4fec-a1c8-3f5c32fabc94",
+		"name": "Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29238904"
+	},
+	"item": [
+		{
+			"name": "Bank",
+			"item": [
+				{
+					"name": "Opening Acccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\" : \"Munjapara\",\r\n        \"accountNumber\" : \"000000000002\",\r\n        \"ifscCode\" : \"HARSHOO9\",\r\n        \"address\" : \"Punagam\",\r\n        \"branchName\" : \"Punagam, Surat.\",\r\n        \"amount\" : 5000.0,\r\n        \"email\" : \"harshmunjapara@gmail.com\"\r\n    }\r\n    \r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/HarshBank/open",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HarshBank",
+								"open"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deposite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/HarshBank/deposite?accountNumber=000000000001&amount=2000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HarshBank",
+								"deposite"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "000000000001"
+								},
+								{
+									"key": "amount",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/HarshBank/withdraw?accountNumber=000000000001&amount=500",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HarshBank",
+								"withdraw"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "000000000001"
+								},
+								{
+									"key": "amount",
+									"value": "500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{bank}}transfer?senderAccount=000000000001&amount=300&receiverAccount=000000000002",
+							"host": [
+								"{{bank}}transfer"
+							],
+							"query": [
+								{
+									"key": "senderAccount",
+									"value": "000000000001"
+								},
+								{
+									"key": "amount",
+									"value": "300"
+								},
+								{
+									"key": "receiverAccount",
+									"value": "000000000002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "passbook",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/HarshBank/Statement/passbook?accountNumber=000000000001&email=harshmunjapara005@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HarshBank",
+								"Statement",
+								"passbook"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "000000000001"
+								},
+								{
+									"key": "email",
+									"value": "harshmunjapara005@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/HarshBank/checkBalance?accountNumber=000000000001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HarshBank",
+								"checkBalance"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "000000000001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CloseAccount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/HarshBank/close?accountNumber=000000000004",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HarshBank",
+								"close"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "000000000004"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/register?email=harshmunjapara005@gmail.com&acNumber=000000000001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "harshmunjapara005@gmail.com"
+								},
+								{
+									"key": "acNumber",
+									"value": "000000000001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/login?email=harshmunjapara005@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "harshmunjapara005@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/verify?otp=225488",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"verify"
+							],
+							"query": [
+								{
+									"key": "otp",
+									"value": "225488"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/logout?email=harshmunjapara005@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logout"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "harshmunjapara005@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
