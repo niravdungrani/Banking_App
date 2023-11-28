@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("HarshBank/Statement")
+@RequestMapping("Statement")
 public class TransacationController {
     @Autowired
     TranscationService transcationService;

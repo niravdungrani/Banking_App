@@ -3,12 +3,14 @@ package com.Bank_System.Controller;
 import com.Bank_System.Model.Bank;
 import com.Bank_System.Model.ClosedAccount;
 import com.Bank_System.Service.BankService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Tag(name = "Greeting", description = "Endpoints for greeting messages")
 @RequestMapping("Bank")
 public class BankController {
 
