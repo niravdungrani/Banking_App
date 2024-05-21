@@ -7,8 +7,11 @@ import com.Bank_System.Model.User;
 import com.Bank_System.Repository.BankRepo;
 import com.Bank_System.Repository.TranscationRepo;
 import com.Bank_System.Repository.UserRepo;
+import jakarta.mail.Flags;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -24,6 +27,8 @@ public class BankService {
     TranscationRepo transcationRepo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    Environment environment;
 
 
     public List<Bank> openingAccount(List<Bank> list) {
@@ -61,6 +66,12 @@ public class BankService {
     }
 
     public String findByAccountNumberforWithdraw(String accountNumber, Double amount) {
+        String[] activeProfiles = environment.getActiveProfiles();
+        System.out.println("Active profiles: " + Arrays.toString(activeProfiles));
+
+        if (Arrays.asList(activeProfiles).contains("uat")) {
+            throw new UnsupportedOperationException("Withdraw operation is not allowed in UAT environment");
+        }
         User user = userRepo.getByUserAccountNumber(accountNumber);
         Bank update = bankRepo.findByAccountNumber(accountNumber);
         if (user==null){
@@ -102,8 +113,8 @@ public class BankService {
         return timestamp + randomNumber;
     }
 
-
-    public String transferAmount(String senderAccount, String receiverAccount, Double amount) {
+@Transactional(rollbackFor = Exception.class)
+    public String transferAmount(String senderAccount, String receiverAccount, Double amount) throws Exception {
 
         User user = userRepo.getByUserAccountNumber(senderAccount);
         if (user==null){
@@ -134,10 +145,6 @@ public class BankService {
         th.setStatus("Debited");
         transcationService.add(th);
 
-        Double currentAmountRecevier = recevicer.getAmount();
-        currentAmountRecevier += amount;
-        recevicer.setAccountNumber(recevicer.getAccountNumber());
-        recevicer.setAmount(currentAmountRecevier);
 
         TransactionHistory th1 = new TransactionHistory();
         th1.setBranchName(recevicer.getBranchName());
@@ -150,8 +157,18 @@ public class BankService {
 
         transcationService.add(th1);
 
-        bankRepo.save(recevicer);
         bankRepo.save(sender);
+
+        Boolean flag=true;
+        if(flag==true) {
+            throw new Exception("Error");
+        }
+        Double currentAmountRecevier = recevicer.getAmount();
+        currentAmountRecevier += amount;
+        recevicer.setAccountNumber(recevicer.getAccountNumber());
+        recevicer.setAmount(currentAmountRecevier);
+        bankRepo.save(recevicer);
+
         return "Sender Accounr  : " +  senderAccount + "  Receiver Account : " + receiverAccount + " Amount : " + amount;
     }
 

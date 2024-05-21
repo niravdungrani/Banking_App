@@ -32,7 +32,7 @@ public class BankController {
     }
 
     @PostMapping("/transfer")
-    public String transferAmount(@RequestParam String senderAccount,@RequestParam String receiverAccount,@RequestParam Double amount){
+    public String transferAmount(@RequestParam String senderAccount,@RequestParam String receiverAccount,@RequestParam Double amount) throws Exception {
         return bankService.transferAmount(senderAccount,receiverAccount,amount);
     }
 
